@@ -40,9 +40,6 @@ class Solution {
         stack.push(root);
         while(!stack.isEmpty()){
             TreeNode curr = stack.pop();
-            if(curr == null){
-                continue;
-            }
             answer.add(curr.val);
             if(curr.right!=null){
                 stack.push(curr.right);
