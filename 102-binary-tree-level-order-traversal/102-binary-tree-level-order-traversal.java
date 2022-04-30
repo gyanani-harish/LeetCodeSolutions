@@ -36,7 +36,6 @@ class Solution {
             if(answer.size()>level){
                 List<Integer> list = answer.get(level);
                 list.add(curr.node.val);
-                //answer.add(level, list);
             } else {
                 List<Integer> list = new LinkedList<>();
                 list.add(curr.node.val);
