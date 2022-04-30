@@ -14,6 +14,38 @@
  * }
  */
 class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        //with queue
+        List<List<Integer>> answer = new LinkedList<>();
+        if(root == null){
+            return answer;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean anyRightValue=false;
+        int count;
+        while(!queue.isEmpty()){
+            count = queue.size();
+            List<Integer> list = new LinkedList<Integer>();
+            for(int i =0;i<count;i++){
+                TreeNode curr = queue.poll();
+                if(curr!=null){
+                    list.add(curr.val);
+                    queue.add(curr.left);
+                    queue.add(curr.right);
+                    if(curr.left!=null || curr.right!=null){
+                        anyRightValue=true;
+                    }
+                }
+            }
+            answer.add(list);
+            if(anyRightValue == false){
+                break;
+            }
+            anyRightValue = false;
+        }
+        return answer;
+    }
     static class MyPair{
         TreeNode node;
         int level;
@@ -22,7 +54,7 @@ class Solution {
             this.level = level;
         }
     }
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrderWithStack(TreeNode root) {
         List<List<Integer>> answer = new LinkedList<>();
         if(root == null){
             return answer;
