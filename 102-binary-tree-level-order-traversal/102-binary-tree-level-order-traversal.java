@@ -22,7 +22,6 @@ class Solution {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        //boolean anyRightValue=false;
         int count;
         while(!queue.isEmpty()){
             count = queue.size();
@@ -37,16 +36,9 @@ class Solution {
                     if(curr.right!=null){
                         queue.add(curr.right);
                     }
-                    //if(curr.left!=null || curr.right!=null){
-                    //    anyRightValue=true;
-                    //}
                 }
             }
             answer.add(list);
-            //if(anyRightValue == false){
-            //    break;
-            //}
-            //anyRightValue = false;
         }
         return answer;
     }
