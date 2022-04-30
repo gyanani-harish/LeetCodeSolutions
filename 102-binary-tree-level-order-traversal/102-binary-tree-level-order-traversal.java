@@ -22,7 +22,7 @@ class Solution {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        boolean anyRightValue=false;
+        //boolean anyRightValue=false;
         int count;
         while(!queue.isEmpty()){
             count = queue.size();
@@ -31,18 +31,22 @@ class Solution {
                 TreeNode curr = queue.poll();
                 if(curr!=null){
                     list.add(curr.val);
-                    queue.add(curr.left);
-                    queue.add(curr.right);
-                    if(curr.left!=null || curr.right!=null){
-                        anyRightValue=true;
+                    if(curr.left!=null){
+                        queue.add(curr.left);
                     }
+                    if(curr.right!=null){
+                        queue.add(curr.right);
+                    }
+                    //if(curr.left!=null || curr.right!=null){
+                    //    anyRightValue=true;
+                    //}
                 }
             }
             answer.add(list);
-            if(anyRightValue == false){
-                break;
-            }
-            anyRightValue = false;
+            //if(anyRightValue == false){
+            //    break;
+            //}
+            //anyRightValue = false;
         }
         return answer;
     }
