@@ -9,7 +9,7 @@
  * }
  */
 class Solution {
-    fun minDepth(root: TreeNode?): Int {
+    fun minDepth2(root: TreeNode?): Int {
          if(root == null) return 0
         val left = minDepth(root.left)
         val right = minDepth(root.right)
@@ -19,5 +19,32 @@ class Solution {
             return Math.min(left,right) + 1
         }
     }
-    
+    fun minDepth(root: TreeNode?): Int {
+        val queue: Queue<TreeNode?> = LinkedList<TreeNode?>()
+        queue.add(root)
+        var level = 1
+        while(!queue.isEmpty()){
+            val size = queue.size
+            for(i in 0..size-1){
+                val node = queue.poll();
+                if(isLeafNode(node)){
+                    return level
+                }
+                node?.left?.let {
+                    queue.add(it)
+                }
+                node?.right?.let{
+                    queue.add(it)
+                }
+            }
+            level++
+        }
+        return 0
+    }
+    fun isLeafNode(node: TreeNode?): Boolean {
+        node?.let{
+            return node.left == null && node.right == null
+        }
+        return false
+    }
 }
