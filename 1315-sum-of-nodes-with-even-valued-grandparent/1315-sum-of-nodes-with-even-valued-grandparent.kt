@@ -24,7 +24,7 @@ class Solution {
                 if(node == null){
                     continue
                 }
-                val isNodeEven = node.`val`%2==0
+                val isNodeEven = (node.`val` and 1)==0
                 if(node.left!=null){
                     queue.add(node.left)
                     if(isNodeEven){
