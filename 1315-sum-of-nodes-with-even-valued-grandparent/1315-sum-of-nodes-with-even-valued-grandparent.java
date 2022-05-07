@@ -43,7 +43,7 @@ class Solution {
             int size = queue.size();
             for(int i=0;i<size;i++){
                 TreeNodeWithParent node = queue.poll();
-                if(node.parent!=null && node.parent.parent!=null && node.parent.parent.val%2==0){
+                if(node.parent!=null && node.parent.parent!=null && (node.parent.parent.val&1)==0){
                     total+=node.val;
                 }
                 if(node.left!=null){
