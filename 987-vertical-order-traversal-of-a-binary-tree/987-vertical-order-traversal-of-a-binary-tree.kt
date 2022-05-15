@@ -8,8 +8,6 @@
  *     var right: TreeNode? = null
  * }
  */
-import java.util.*
-import java.util.AbstractMap.SimpleEntry
 
 class Solution {
      fun verticalTraversal(root: TreeNode?): List<List<Int>> {
