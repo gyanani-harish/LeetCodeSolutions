@@ -15,39 +15,19 @@
  */
 class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
-        /*
-        inOrder without visited set
-        List<Integer> answer = new LinkedList<>();
-        Stack<TreeNode> stack = new Stack<>();
-        while(root!=null || !stack.isEmpty()){
-            if(root == null){
-                root = stack.pop();
-            }
-            while(root!=null){
-                stack.push(root);
-                root = root.left;
-            }
-            root = stack.pop();
-            answer.add(root.val);
-            
-            root = root.right;
-        }*/
-        List<Integer> answer = new LinkedList<>();
-        if(root == null){
-            return answer;
+        List<Integer> answerList = new ArrayList<>();
+        if(root == null){ 
+            return new ArrayList<>();
         }
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        while(!stack.isEmpty()){
-            TreeNode curr = stack.pop();
-            answer.add(curr.val);
-            if(curr.right!=null){
-                stack.push(curr.right);
-            }
-            if(curr.left!=null){
-                stack.push(curr.left);
-            }
+        answerList.add(root.val);
+        List<Integer> leftList = preorderTraversal(root.left);
+        if(leftList.size()>0){
+            answerList.addAll(leftList);
         }
-        return answer;
+        List<Integer> rightList = preorderTraversal(root.right);
+        if(rightList.size()>0){
+            answerList.addAll(rightList);
+        }
+        return answerList;
     }
 }
