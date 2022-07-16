@@ -50,17 +50,17 @@ class Solution {
         //with loop
         List<Integer> ansList = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
-        Set<TreeNode> isVisited = new HashSet<>();
+        //Set<TreeNode> isVisited = new HashSet<>();
         stack.push(root);
         while(!stack.isEmpty()){
             TreeNode polledNode = stack.pop();
             if(polledNode == null){
                 continue;
             }
-            if(!isVisited.contains(polledNode)){
+            //if(!isVisited.contains(polledNode)){
                 ansList.add(polledNode.val);
-                isVisited.add(polledNode);
-            }
+            //    isVisited.add(polledNode);
+            //}
             if(polledNode.right!=null){
                 stack.push(polledNode.right);
             }
