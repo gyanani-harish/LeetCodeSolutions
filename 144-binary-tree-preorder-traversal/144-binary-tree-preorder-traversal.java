@@ -31,7 +31,7 @@ class Solution {
         }
         return answerList;
     }
-    public List<Integer> preorderTraversal(TreeNode root) {
+    public List<Integer> preorderTraversal3(TreeNode root) {
         //with recursion but save addAll call
         return preorderTraversalSaveAddAll(root, new ArrayList<Integer>());
     }
@@ -46,8 +46,29 @@ class Solution {
     }
     
     
-    public List<Integer> preorderTraversal3(TreeNode root) {
-        //with for loop
-        return null;
+    public List<Integer> preorderTraversal(TreeNode root) {
+        //with loop
+        List<Integer> ansList = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        Set<TreeNode> isVisited = new HashSet<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode polledNode = stack.pop();
+            if(polledNode == null){
+                continue;
+            }
+            if(!isVisited.contains(polledNode)){
+                ansList.add(polledNode.val);
+                isVisited.add(polledNode);
+            }
+            if(polledNode.right!=null){
+                stack.push(polledNode.right);
+            }
+            if(polledNode.left!=null){
+                stack.push(polledNode.left);
+            }
+        }
+        
+        return ansList;
     }
 }
