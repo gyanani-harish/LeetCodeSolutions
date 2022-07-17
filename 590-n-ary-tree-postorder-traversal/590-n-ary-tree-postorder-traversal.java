@@ -38,12 +38,25 @@ class Solution {
                 isVisited.add(topNode);
                 stack.pop();
             } else {
-                for(int i = topNode.children.size()-1;i>-1;i--){
+                ListIterator<Node> gfg_itr
+            = topNode.children.listIterator(topNode.children.size());
+  
+        // hasPrevious() returns true if the list has
+        // previous element
+        while (gfg_itr.hasPrevious()) 
+        {
+            Node child = gfg_itr.previous();
+            if(child!=null){
+                stack.push(child);
+            }
+            
+        }
+                /*for(int i = topNode.children.size()-1;i>-1;i--){
                     Node child = topNode.children.get(i);
                     if(child!=null){
                         stack.push(child);
                     }
-                }
+                }*/
             }
         }
         return ansList;
