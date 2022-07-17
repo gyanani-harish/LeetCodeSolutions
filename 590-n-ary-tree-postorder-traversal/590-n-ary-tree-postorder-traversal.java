@@ -56,12 +56,15 @@ class Solution {
         //    return new NullPointerExcception("node is null");
         //}
         
-        for(int i = node.children.size()-1;i>-1;i--){
+        return isVisited.contains(node.children.get(0));
+        
+        
+        /*for(int i = node.children.size()-1;i>-1;i--){
             Node child = node.children.get(i);
             if(!isVisited.contains(child)){
                 return false;
             }
-        }
-        return true;
+        }*/
+        //return true;
     }
 }
