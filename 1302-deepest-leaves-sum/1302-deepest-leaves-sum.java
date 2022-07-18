@@ -31,8 +31,9 @@ class Solution {
         if(root.right!=null){
             deepestLeavesSum(root.right, level+1, sumMap);
         }
-        if(isLeafNode(root)){
+        if(isLeafNode(root) && level==highestLevel){
             int alreadySum = sumMap.getOrDefault(level, 0);
+            sumMap.clear();
             sumMap.put(level, alreadySum+root.val);
         }
     }
