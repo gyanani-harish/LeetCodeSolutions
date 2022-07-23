@@ -15,8 +15,10 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        //7:03
-        return usingLevelOrder(root);
+        //7:03 - 7:10
+        //return usingLevelOrder(root);
+        //7:11 - 
+        return usingReversePreOrder(root, 0, new ArrayList<Integer>());
     }
     public List<Integer> usingLevelOrder(TreeNode root){
         List<Integer> result = new LinkedList<>();
@@ -42,7 +44,15 @@ class Solution {
         }
         return result;
     }
-    /*public List<Integer> usingReversePreOrder(){
-        
-    }*/
+    public List<Integer> usingReversePreOrder(TreeNode root, int level, List<Integer> result){
+        if(root == null){
+            return result;
+        }
+        if(level == result.size()){
+            result.add(root.val);
+        }
+        usingReversePreOrder(root.right, level+1, result);
+        usingReversePreOrder(root.left, level+1, result);
+        return result;
+    }
 }
