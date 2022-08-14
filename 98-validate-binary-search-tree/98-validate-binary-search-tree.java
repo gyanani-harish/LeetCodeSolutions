@@ -15,30 +15,15 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        //6:51 pm
-        return isValidBST(root, new AtomicInteger(Integer.MIN_VALUE), new AtomicBoolean(false));
+        return isValidBSTUtil(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
-    public boolean isValidBST(TreeNode root, AtomicInteger lastValue, AtomicBoolean isSet) {
+    public boolean isValidBSTUtil(TreeNode root, long min, long max){
         if(root == null){
             return true;
         }
-        boolean leftRes = isValidBST(root.left, lastValue, isSet);
-        if(leftRes == false){
+        if(root.val<=min || root.val>=max){
             return false;
         }
-        if(root.val>lastValue.get()){
-
-        } else if(!isSet.get()){
-
-        } else {
-            return false;
-        }
-        lastValue.set(root.val);
-        isSet.set(true);
-        boolean rightRes = isValidBST(root.right, lastValue, isSet);
-        if(rightRes == false){
-            return false;
-        }
-        return true;
+        return isValidBSTUtil(root.left, min, root.val) && isValidBSTUtil(root.right, root.val, max);
     }
 }
