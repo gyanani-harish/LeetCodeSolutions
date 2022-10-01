@@ -7,46 +7,29 @@ class Solution {
     //2. same x element found then priority and direction
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
         int pos = nearestIndex(arr, x);
-        List<Integer> list = new ArrayList<>();
-        handleComparisonCase(arr, list, k, pos, x);
-        return list.subList(0, k);
+        return handleComparisonCase(arr, k, pos, x);
     }
 
-    private void handleComparisonCase(int[] arr, List<Integer> list, int k, int pos, int x) {
+    private List<Integer> handleComparisonCase(int[] arr, int k, int pos, int x) {
+        List<Integer> list = new ArrayList<>();
         int i = 0;
-        int l = pos - 1;
-        Integer m = pos;
-        int r = pos + 1;
-
-        int diff1 = l >= 0 ? x - arr[l] : Integer.MAX_VALUE;
-        int diff1_5 = m != null && m >= 0 && m <= arr.length - 1 ? Math.abs(x - arr[m]) : Integer.MAX_VALUE;
-        int diff2 = r <= arr.length - 1 ? arr[r] - x : Integer.MAX_VALUE;
-        boolean extraToAdd = true;
-        if (m != null) {
-            if (diff1_5 < diff1 && diff1_5 <= diff2) {
-                list.add(arr[m]);
-                extraToAdd = false;
-                k--;
-            }
+        int l = arr[pos] != x && pos > 0 ? pos - 1 : pos;
+        int r = pos;
+        if (l == r) {
+            r++;
         }
-        while (i < k) {
-            diff1 = l >= 0 ? x - arr[l] : Integer.MAX_VALUE;
-            diff2 = r <= arr.length - 1 ? arr[r] - x : Integer.MAX_VALUE;
-            if(extraToAdd && diff1_5<diff1 && diff1_5<diff2){
-                list.add(arr[m]);
-                list.sort(Integer::compareTo);
-                extraToAdd = false;
-                i++;
-            }
-            if (diff1 <= diff2) {
+        while (i++ < k) {
+            int diff1 = l >= 0 ? x - arr[l] : Integer.MAX_VALUE;
+            int diff2 = r <= arr.length - 1 ? arr[r] - x : Integer.MAX_VALUE;
+            if (Math.abs(diff1) <= Math.abs(diff2)) {
                 list.add(0, arr[l--]);
-            }else {
+            } else {
                 list.add(arr[r++]);
             }
-            i++;
         }
+        return list;
     }
-
+    
     private int nearestIndex(int[] arr, int x) {
         int low = 0;
         int high = arr.length - 1;
