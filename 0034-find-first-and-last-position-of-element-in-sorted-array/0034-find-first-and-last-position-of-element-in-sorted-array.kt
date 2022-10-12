@@ -3,38 +3,46 @@ class Solution {
         if (nums.isEmpty()) {
             return intArrayOf(-1, -1)
         }
-        val result = binarySearch(nums, target, 0, nums.size - 1)
-        val iterator = result.iterator()
-        var l = -1
-        var r = -1
-        while (iterator.hasNext()) {
-            if (l == -1) {
-                l = iterator.next()
-            }
-            r = if (iterator.hasNext()) iterator.next() else l
-        }
-        return intArrayOf(l, r)
+        return binarySearch(nums, target, 0, nums.size - 1)
     }
 
-    private fun binarySearch(nums: IntArray, target: Int, _low: Int, _high: Int): Set<Int> {
+    private fun binarySearch(nums: IntArray, target: Int, _low: Int, _high: Int): IntArray {
+        //println("Window search $_low and $_high")
         var low = _low
         var high = _high
-        val resultSet: MutableSet<Int> = TreeSet()
+        val resultSet = IntArray(2,{ -1 })
         while (low <= high) {
             val midIndex = (low + high) / 2
             if (nums[midIndex] == target) {
-                resultSet.add(midIndex)
+                if(midIndex<resultSet[0] || resultSet[0] == -1){
+                    resultSet[0] = midIndex
+                }
+                if(midIndex>resultSet[1]){
+                   resultSet[1] = midIndex
+                }
                 if (low <= midIndex - 1 && nums[midIndex - 1] == target && (!resultSet.contains(midIndex - 1) || !resultSet.contains(
                         low
                     ))
                 ) {
-                    resultSet.addAll(binarySearch(nums, target, low, midIndex - 1))
+                    val result = binarySearch(nums, target, low, midIndex - 1)
+                    if(result[0]!=-1 && (result[0]<resultSet[0] || resultSet[0] == -1)){
+                        resultSet[0] = result[0]
+                    }
+                    if(result[1]>resultSet[1]){
+                        resultSet[1] = result[1]
+                    }
                 }
                 if (midIndex + 1 <= high && nums[midIndex + 1] == target && (!resultSet.contains(midIndex + 1) || !resultSet.contains(
                         high
                     ))
                 ) {
-                    resultSet.addAll(binarySearch(nums, target, midIndex + 1, high))
+                    val result = binarySearch(nums, target, midIndex + 1, high)
+                    if(result[0]!=-1 && (result[0]<resultSet[0] || resultSet[0] == -1)){
+                        resultSet[0] = result[0]
+                    }
+                    if(result[1]>resultSet[1]){
+                        resultSet[1] = result[1]
+                    }
                 }
                 return resultSet
             } else if (nums[midIndex] < target) {
