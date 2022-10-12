@@ -29,6 +29,9 @@ class Solution {
         //println("Window search $_low and $_high")
         var low = _low
         var high = _high
+        if(nums[low] == target && nums[high] == target){
+            return intArrayOf(low, high)
+        }
         val resultArr = IntArray(2, { -1 })
         while (low <= high) {
             val midIndex = (low + high) / 2
